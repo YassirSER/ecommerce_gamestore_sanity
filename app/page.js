@@ -3,6 +3,8 @@ import { client } from "../lib/client";
 
 import { Product, FooterBanner, HeroBanner } from "./components/index";
 
+export const revalidate = 0;
+
 const Home = async () => {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
