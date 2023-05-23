@@ -12,14 +12,6 @@ export default {
       },
     },
     {
-      name: 'smallImage',
-      title: 'SmallImage',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
       name: 'buttonText',
       title: 'ButtonText',
       type: 'string',
