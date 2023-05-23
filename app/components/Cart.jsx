@@ -16,7 +16,7 @@ import { urlFor } from "../../lib/client";
 import Link from "next/link";
 
 const Cart = () => {
-  const cartRef = useRef();
+  const cartRef = useRef(null);
   const {
     totalPrice,
     totalQuantities,
@@ -27,22 +27,24 @@ const Cart = () => {
   } = useStateContext();
 
   useEffect(() => {
-    const closeDropdown = (e) => {
-      if (cartRef.current.contains(e.target)) {
-        setShowCart(false);
-      }
-    };
-
-    document.addEventListener("mousedown", closeDropdown);
-
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", closeDropdown);
+      document.removeEventListener("click", handleClickOutside);
     };
   });
 
+  const handleClickOutside = (e) => {
+    if (!cartRef.current.contains(e.target)) {
+      setShowCart(false);
+      console.log("clicked outside");
+    } else {
+      setShowCart(true);
+    }
+  };
+
   return (
-    <div className="cart-wrapper" ref={cartRef}>
-      <div className="cart-container">
+    <div className="cart-wrapper">
+      <div className="cart-container" ref={cartRef}>
         <button
           type="button"
           className="cart-heading"
@@ -52,7 +54,6 @@ const Cart = () => {
           <span className="heading">Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
-        {console.log(cartItems)}
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
@@ -80,7 +81,7 @@ const Cart = () => {
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>
-                    <h4>${item.price}</h4>
+                    <h4>{item.price}MAD</h4>
                   </div>
                   <div className="flex bottom">
                     <div>
@@ -120,10 +121,10 @@ const Cart = () => {
           <div className="cart-bottom">
             <div className="total">
               <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
+              <h3>{totalPrice}MAD</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn" onClick="">
+              <button type="button" className="btn">
                 Pay with Stripe
               </button>
             </div>
