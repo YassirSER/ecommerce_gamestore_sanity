@@ -689,10 +689,11 @@ span.text-red {
   }
   .product-detail-container {
     flex-wrap: wrap;
+    justify-content: center;
   }
   .product-detail-container .product-detail-image {
-    width: 350px;
-    height: 350px;
+    width: 250px;
+    height: 300px;
   }
   .cart-container {
     width: 415px;
