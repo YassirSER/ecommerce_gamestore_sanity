@@ -8,7 +8,7 @@ import {
   AiOutlineShopping,
 } from "react-icons/ai";
 
-import { TiDeleteOutline } from "react-icons/ti";
+import { GiTrashCan } from "react-icons/gi";
 import toast from "react-hot-toast";
 
 import { useStateContext } from "../context/stateContext";
@@ -58,15 +58,13 @@ const Cart = () => {
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
             <h3>Your shopping bag is empty</h3>
-            <Link href="/">
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                className="btn"
-              >
-                Continue Shopping
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={() => setShowCart(false)}
+              className="btn"
+            >
+              Continue Shopping
+            </button>
           </div>
         )}
 
@@ -81,7 +79,14 @@ const Cart = () => {
                 <div className="item-desc">
                   <div className="flex top">
                     <h5>{item.name}</h5>
-                    <h4>{item.price}MAD</h4>
+                    <button
+                      type="button"
+                      className="remove-item"
+                      onClick={() => onRemove(item)}
+                    >
+                      <GiTrashCan />
+                    </button>
+                    {/* <h4>{item.price}MAD</h4> */}
                   </div>
                   <div className="flex bottom">
                     <div>
@@ -105,13 +110,14 @@ const Cart = () => {
                         </span>
                       </p>
                     </div>
-                    <button
+                    <h4>{item.price}MAD</h4>
+                    {/* <button
                       type="button"
                       className="remove-item"
                       onClick={() => onRemove(item)}
                     >
-                      <TiDeleteOutline />
-                    </button>
+                      <GiTrashCan />
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -124,8 +130,12 @@ const Cart = () => {
               <h3>{totalPrice}MAD</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn">
-                Pay with Stripe
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setShowCart(false)}
+              >
+                Show cart
               </button>
             </div>
           </div>
