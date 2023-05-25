@@ -108,6 +108,11 @@ span.text-red {
   margin-bottom: 10px;
 }
 
+.active {
+  /* background-color: #1f0a4e; */
+  color: #fad318;
+}
+
 .category {
   padding: 10px;
   font-weight: 500;
@@ -122,6 +127,7 @@ span.text-red {
   position: absolute;
   right: -8px;
   font-size: 12px;
+  padding-top: 2px;
   color: #eee;
   background-color: #f02d34;
   width: 18px;
@@ -339,7 +345,7 @@ span.text-red {
 }
 
 .footer-container {
-  color: #324d67;
+  color: white;
   text-align: center;
   margin-top: 20px;
   padding: 30px 10px;
@@ -603,7 +609,7 @@ span.text-red {
 .maylike-products-wrapper h2 {
   text-align: center;
   margin: 50px;
-  color: #324d67;
+  color: white;
 
   font-size: 28px;
 }
