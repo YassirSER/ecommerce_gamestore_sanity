@@ -4,16 +4,20 @@ import React from "react";
 import Link from "next/link";
 import { AiOutlineShopping } from "react-icons/ai";
 
-import Cart from "./Cart";
 import { useStateContext } from "../context/stateContext";
+import { SearchBar, Cart } from "./index";
 
 const Navbar = () => {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   return (
     <div className="navbar-container">
-      <p className="logo">
-        <Link href="/">GameStore</Link>
-      </p>
+      <div className="logo-searchbar-container">
+        <p className="logo">
+          <Link href="/">GameStore</Link>
+        </p>
+
+        <SearchBar />
+      </div>
 
       <button
         className="cart-icon"

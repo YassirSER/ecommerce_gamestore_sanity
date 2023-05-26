@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Head from "next/head";
 
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import CategoriesHeader from "./CategoriesHeader";
+import { Navbar, Footer, Loading } from "./index";
 
 const Layout = ({ children }) => {
   return (
@@ -15,7 +14,9 @@ const Layout = ({ children }) => {
         <Navbar />
         <CategoriesHeader />
       </header>
-      <main className="main-container">{children}</main>
+      <Suspense fallback={<Loading />}>
+        <main className="main-container">{children}</main>
+      </Suspense>
       <footer>
         <Footer />
       </footer>

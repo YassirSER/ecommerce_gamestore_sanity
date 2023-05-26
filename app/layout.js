@@ -7,7 +7,6 @@ import "./globals.css";
 
 import Layout from "./components/Layout";
 import { StateContext } from "./context/stateContext";
-// import {  } from './fonts/metropolis'
 
 const metropolis = localFont({
   src: "./fonts/metropolis/Metropolis-Regular.woff2",

@@ -36,7 +36,6 @@ const Cart = () => {
   const handleClickOutside = (e) => {
     if (!cartRef.current.contains(e.target)) {
       setShowCart(false);
-      console.log("clicked outside");
     } else {
       setShowCart(true);
     }

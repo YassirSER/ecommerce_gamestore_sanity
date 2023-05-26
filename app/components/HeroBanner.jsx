@@ -9,7 +9,6 @@ const HeroBanner = ({ heroBanner }) => {
       className="hero-banner-container"
       style={{ backgroundImage: `url(${urlLink})` }}
     >
-      {console.log(heroBanner)}
       <div>
         <p className="beats-solo">{heroBanner.smallText}</p>
         <h3>{heroBanner.midText}</h3>

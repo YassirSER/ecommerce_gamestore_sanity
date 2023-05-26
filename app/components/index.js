@@ -7,3 +7,6 @@ export { default as Cart } from "./Cart";
 export { default as Layout } from "./Layout";
 export { default as ProductDetailsClient } from "./ProductDetailsClient";
 export { default as Dropdown } from "./Dropdown";
+export { default as ProductsWithSorting } from "./ProductsWithSorting";
+export { default as SearchBar } from "./SearchBar";
+export { default as Loading } from "./Loading";

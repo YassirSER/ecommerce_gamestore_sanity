@@ -84,6 +84,7 @@ span.text-red {
 }
 .logo {
   color: white;
+  padding: 20px;
   font-size: 18px;
 }
 .cart-icon {
@@ -184,6 +185,61 @@ span.text-red {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.logo-searchbar-container {
+  display: flex;
+  width: 70%;
+  /* justify-content: flex-start; */
+  height: 15vh;
+  align-items: center;
+}
+
+.searchbar-container {
+  width: 100%;
+}
+
+.searchbar {
+  font-size: 15px;
+  width: 100%;
+  background-color: #4618ac;
+  padding: 15px;
+  border: none;
+  color: white;
+}
+
+.searchbar::placeholder {
+  color: #aa95d9;
+}
+
+.searchbar:focus {
+  outline: none;
+}
+
+.search-icon {
+  padding: 5px 0px 5px 5px;
+  font-size: 2.5rem;
+}
+
+.form-container {
+  display: flex;
+  border: 1px solid white;
+  align-items: center;
+}
+
+.loaderIcon {
+  font-size: 35px;
+  color: white;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
 }
 
 .product-name {

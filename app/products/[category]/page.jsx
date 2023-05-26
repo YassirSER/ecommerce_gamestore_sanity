@@ -1,12 +1,13 @@
 import React from "react";
 
 import { client } from "../../../lib/client";
-import CategorisedProducts from "./CategorisedProducts";
+// import CategorisedProducts from "./CategorisedProducts";
+import { ProductsWithSorting } from "../../components/index";
 
 const ProductCategorised = async ({ params: { category } }) => {
   const products = await getProductsByCategory(category);
 
-  return <CategorisedProducts products={products} />;
+  return <ProductsWithSorting products={products} />;
 };
 
 const getProductsByCategory = async (category) => {
