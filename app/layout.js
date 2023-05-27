@@ -2,6 +2,7 @@
 
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
+import NextTopLoader from "nextjs-toploader";
 
 import "./globals.css";
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <StateContext>
           <Layout>
             <Toaster />
+            <NextTopLoader />
             {children}
           </Layout>
         </StateContext>

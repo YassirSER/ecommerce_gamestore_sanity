@@ -16,21 +16,25 @@ const ProductsWithSorting = ({ products }) => {
   };
   return (
     <>
-      <div className="sorting-container">
-        <Dropdown
-          //   isSearchable
-          //   isMulti
-          placeHolder="Sort by"
-          options={[
-            { value: "ASC", label: "ASC" },
-            { value: "DESC", label: "DESC" },
-          ]}
-          onChange={(value) => {
-            setFilter(value.value);
-          }}
-        />
-      </div>
+      {products.length >= 1 && (
+        <div className="sorting-container">
+          <p>Results found: {products.length}</p>
+          <Dropdown
+            //   isSearchable
+            //   isMulti
+            placeHolder="Sort by"
+            options={[
+              { value: "ASC", label: "ASC" },
+              { value: "DESC", label: "DESC" },
+            ]}
+            onChange={(value) => {
+              setFilter(value.value);
+            }}
+          />
+        </div>
+      )}
       <div className="products-container">
+        {products.length < 1 && <div>no results found</div>}
         {filter.length > 1
           ? sortProducts(filter).map((product) => (
               <Product key={product._id} product={product} />

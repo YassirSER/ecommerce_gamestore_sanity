@@ -14,9 +14,9 @@ const Layout = ({ children }) => {
         <Navbar />
         <CategoriesHeader />
       </header>
-      <Suspense fallback={<Loading />}>
-        <main className="main-container">{children}</main>
-      </Suspense>
+      {/* <Suspense fallback={<Loading />}> */}
+      <main className="main-container">{children}</main>
+      {/* </Suspense> */}
       <footer>
         <Footer />
       </footer>

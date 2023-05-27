@@ -22,7 +22,7 @@ const SearchBar = () => {
           type="text"
           className="searchbar"
           value={searchParam}
-          placeholder="grand theft auto v"
+          placeholder="Search"
           onChange={(e) => setSearchParam(e.target.value)}
         />
       </form>
