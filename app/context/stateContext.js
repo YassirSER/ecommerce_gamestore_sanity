@@ -1,6 +1,5 @@
 "use client";
 
-import product from "@/sanity/schemas/product";
 import React, { useContext, createContext, useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 
@@ -8,10 +7,12 @@ export const Context = createContext();
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
+  const [showSearchHits, setShowSearchHits] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+  const [showSideMenu, setShowSideMenu] = useState(false);
 
   let foundProduct;
   let index;
@@ -47,6 +48,7 @@ export const StateContext = ({ children }) => {
     }
 
     toast.success(`${qty} ${product.name} added to the cart.`);
+    setQty(1);
   };
 
   const onRemove = (product) => {
@@ -112,6 +114,10 @@ export const StateContext = ({ children }) => {
         setShowCart,
         toggleCartItemQuantity,
         onRemove,
+        showSearchHits,
+        setShowSearchHits,
+        showSideMenu,
+        setShowSideMenu,
       }}
     >
       {children}

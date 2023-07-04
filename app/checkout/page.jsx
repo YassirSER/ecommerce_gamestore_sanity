@@ -12,7 +12,7 @@ import {
   AiOutlineShopping,
 } from "react-icons/ai";
 
-import { TiDeleteOutline } from "react-icons/ti";
+import { GiTrashCan } from "react-icons/gi";
 
 const Checkout = () => {
   const { totalPrice, totalQuantities, cartItems, setShowCart } =
@@ -20,9 +20,9 @@ const Checkout = () => {
 
   return (
     <div className="checkout-products-container">
-      {cartItems.length >= 1 &&
-        cartItems.map((item) => (
-          <div>
+      <div className="product-container">
+        {cartItems.length >= 1 &&
+          cartItems.map((item) => (
             <div className="product" key={item._id}>
               <img
                 src={urlFor(item?.image[0])}
@@ -31,7 +31,13 @@ const Checkout = () => {
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
-                  <h4>{item.price}MAD</h4>
+                  <button
+                    type="button"
+                    className="remove-item"
+                    onClick={() => onRemove(item)}
+                  >
+                    <GiTrashCan />
+                  </button>
                 </div>
                 <div className="flex bottom">
                   <div>
@@ -51,22 +57,15 @@ const Checkout = () => {
                       </span>
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    className="remove-item"
-                    onClick={() => onRemove(item)}
-                  >
-                    <TiDeleteOutline />
-                  </button>
+                  <h4>{item.price}MAD</h4>
                 </div>
               </div>
             </div>
-            <div></div>
-          </div>
-        ))}
-      <div className="total">
-        <h3>Subtotal:</h3>
-        <h3>{totalPrice}MAD</h3>
+          ))}
+        <div className="total">
+          <h3>Subtotal:</h3>
+          <h3>{totalPrice}MAD</h3>
+        </div>
       </div>
     </div>
   );

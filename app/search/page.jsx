@@ -6,19 +6,24 @@ import { Suspense } from "react";
 import { client } from "../../lib/client";
 import { ProductsWithSorting } from "../components/index";
 import Loading from "./Loading";
+// import algoliasearch from "algoliasearch/lite";
+import { InstantSearch } from "react-instantsearch-dom";
+import SearchBox from "./search-box";
+import SearchHits from "./search-hits";
+
+import { algolia } from "../../lib/algolia";
 
 const Search = async () => {
-  const searchParams = useSearchParams();
-  const search = searchParams.get("name");
-  const query = `
-  *[_type == "product" && name match "${search}*"]
-  `;
-  const products = await client.fetch(query);
-
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <ProductsWithSorting products={products} />
+        <div className={"algolia-search"}>
+          <InstantSearch searchClient={algolia} indexName="dev_gamestore">
+            <SearchBox />
+            <SearchHits />
+          </InstantSearch>
+        </div>
+        {/* <ProductsWithSorting products={products} /> */}
       </Suspense>
     </>
   );

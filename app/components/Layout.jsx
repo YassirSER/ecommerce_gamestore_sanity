@@ -2,9 +2,11 @@ import React, { Suspense } from "react";
 import Head from "next/head";
 
 import CategoriesHeader from "./CategoriesHeader";
-import { Navbar, Footer, Loading } from "./index";
+import { Navbar, Footer, SideMenu } from "./index";
+import { useStateContext } from "../context/stateContext";
 
 const Layout = ({ children }) => {
+  const { showSideMenu } = useStateContext();
   return (
     <div className="layout">
       <Head>
@@ -12,7 +14,7 @@ const Layout = ({ children }) => {
       </Head>
       <header>
         <Navbar />
-        <CategoriesHeader />
+        {showSideMenu ? <SideMenu /> : <CategoriesHeader />}
       </header>
       {/* <Suspense fallback={<Loading />}> */}
       <main className="main-container">{children}</main>

@@ -85,7 +85,6 @@ const Cart = () => {
                     >
                       <GiTrashCan />
                     </button>
-                    {/* <h4>{item.price}MAD</h4> */}
                   </div>
                   <div className="flex bottom">
                     <div>
@@ -110,13 +109,6 @@ const Cart = () => {
                       </p>
                     </div>
                     <h4>{item.price}MAD</h4>
-                    {/* <button
-                      type="button"
-                      className="remove-item"
-                      onClick={() => onRemove(item)}
-                    >
-                      <GiTrashCan />
-                    </button> */}
                   </div>
                 </div>
               </div>
@@ -129,13 +121,15 @@ const Cart = () => {
               <h3>{totalPrice}MAD</h3>
             </div>
             <div className="btn-container">
-              <button
-                type="button"
-                className="btn"
-                onClick={() => setShowCart(false)}
-              >
-                Show cart
-              </button>
+              <Link href="/checkout">
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => setShowCart(false)}
+                >
+                  Show cart
+                </button>
+              </Link>
             </div>
           </div>
         )}

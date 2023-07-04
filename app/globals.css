@@ -12,6 +12,7 @@ body,
   /* font-family: "metropolis", Arial, Helvetica, sans-serif; */
   box-sizing: border-box;
   color: white;
+  font-size: 1.6rem/1.5;
 }
 ::-webkit-scrollbar {
   width: 0px;
@@ -42,11 +43,15 @@ a {
   justify-content: space-between;
   align-items: center;
   /* margin: 6px 18px; */
+  width: 100%;
+  z-index: 100;
   padding: 15px;
   height: 15vh;
   position: relative;
   color: white;
+  background-color: #4618ac;
 }
+
 .marquee-text {
   font-size: 29px;
   font-weight: 600;
@@ -147,13 +152,26 @@ span.text-red {
   width: 100%;
 }
 
+.search-icon-sm {
+  display: none;
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+.times-icon-sm {
+  margin-top: 5px;
+  font-size: 1.5rem;
+  margin-right: 5px;
+  position: relative;
+  z-index: 6;
+}
+
 .checkout-products-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 15px;
   margin-top: 20px;
-  width: 50%;
+  width: 100%;
   color: white;
 }
 
@@ -196,8 +214,91 @@ span.text-red {
   align-items: center;
 }
 
+.searchbar-wrapper {
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  /* will-change: transform; */
+  transition: all 1s ease-in-out;
+}
+
 .searchbar-container {
+  position: relative;
   width: 100%;
+  z-index: 100000;
+}
+
+.logoandinput-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid white;
+}
+
+.shadow {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.search-hits {
+  position: absolute;
+  padding: 10px;
+  border: 1px solid #4618ac;
+  border-top: none;
+  background-color: #4618ac;
+  z-index: 6;
+  width: 100%;
+  max-height: 60vh;
+  overflow: auto;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.suggestion {
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 15vh;
+  position: relative;
+}
+
+.suggestion:hover {
+  background-color: #32117d;
+}
+
+.search-img {
+  width: 72px;
+  height: 90%;
+  position: absolute;
+  left: 10px;
+}
+
+.search-price {
+  color: #fad318;
+  position: absolute;
+  right: 10px;
+}
+
+.search-name {
+  max-width: 70%;
+  position: absolute;
+  left: 6rem;
+  padding-left: 10px;
+  padding-right: 40px;
+}
+
+.algolia-search {
+  width: 100%;
+}
+
+.active-input {
+  background-color: #230c56;
 }
 
 .searchbar {
@@ -213,7 +314,20 @@ span.text-red {
   color: #aa95d9;
 }
 
+.big-input::placeholder {
+  color: #aa95d9;
+}
+
 .searchbar:focus {
+  outline: none;
+}
+
+/* .searchbar:active {
+  background-color: #230c56;
+} */
+
+.big-input:focus {
+  /* background-color: #230c56; */
   outline: none;
 }
 
@@ -256,8 +370,42 @@ span.text-red {
   white-space: pre-wrap; /* let the text wrap preserving spaces */
   padding: 5px;
 }
+
+header {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100vh;
+  top: 0;
+  background-color: #4618ac;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.menu-category {
+  padding: 20px;
+  border-top: 1px solid black;
+}
+
+.bottom-category {
+  border-bottom: 1px solid black;
+}
+
+.hamburger-icon {
+  display: none;
+}
+
 .product-price {
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 1.2rem;
   margin-top: 6px;
   margin-bottom: 10px;
   padding: 10px;
@@ -555,7 +703,7 @@ span.text-red {
 .product-detail-container {
   display: flex;
   gap: 40px;
-  margin: 40px;
+  margin-left: 0 40px 0 40px;
   margin-top: 60px;
   color: white;
 }
@@ -656,6 +804,23 @@ span.text-red {
   transform: scale(1, 1);
   transition: transform 0.5s ease;
 }
+
+.big-input {
+  width: 80%;
+  position: absolute;
+  padding: 5px;
+  right: 2.8rem;
+  border: 1px solid white;
+  opacity: 0;
+  background-color: #4618ac;
+  pointer-events: none;
+}
+
+.opensearch {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
@@ -762,6 +927,12 @@ span.text-red {
 }
 
 @media screen and (max-width: 800px) {
+  .categories-container {
+    display: none;
+  }
+  .hamburger-icon {
+    display: inline-block;
+  }
   .hero-banner-container {
     height: 560px;
   }
@@ -780,6 +951,13 @@ span.text-red {
     left: 30%;
     top: 6%;
     height: 56%;
+  }
+  .search-icon-sm {
+    margin-top: 5px;
+    display: inline-block;
+  }
+  .searchbar-container {
+    display: none;
   }
   .banner-desc .left h3 {
     font-weight: 900;
@@ -835,15 +1013,22 @@ span.text-red {
     margin-left: 50px;
   }
   .product-container {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .checkout-products-container {
+    width: 100%;
     margin-top: 10px;
   }
   .product {
     /* padding: 20px 5px; */
     margin-left: 20px;
   }
+
   .product .cart-product-image {
     width: 25%;
-    height: 25%;
+    height: 100%;
   }
   .buttons .add-to-cart {
     width: 150px;

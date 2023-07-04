@@ -1,33 +1,52 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useRef, useState, useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { connectSearchBox } from "react-instantsearch-dom";
+import { useStateContext } from "../context/stateContext";
 
-const SearchBar = () => {
-  const [searchParam, setSearchParam] = useState("");
-  const router = useRouter();
+const SearchBar = ({ refine, inputClassname }) => {
+  const { showSearchHits, setShowSearchHits } = useStateContext();
+  const searchHitsRef = useRef();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    router.push(`/search?name=${encodeURIComponent(searchParam)}`);
-    setSearchParam("");
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = (e) => {
+    if (!searchHitsRef.current.contains(e.target)) {
+      setShowSearchHits(false);
+    } else {
+      setShowSearchHits(true);
+    }
   };
 
   return (
-    <div className="searchbar-container">
-      <form onSubmit={handleSubmit} className="form-container">
-        <IoSearchOutline className="search-icon" />
-        <input
-          type="text"
-          className="searchbar"
-          value={searchParam}
-          placeholder="Search"
-          onChange={(e) => setSearchParam(e.target.value)}
-        />
-      </form>
+    <div
+      className={
+        showSearchHits
+          ? "logoandinput-container shadow"
+          : "logoandinput-container"
+      }
+      ref={searchHitsRef}
+    >
+      <IoSearchOutline className="search-icon" />
+      <input
+        type="text"
+        className={inputClassname}
+        // ref={inputRef}
+        // value={searchParam}
+        placeholder="Search"
+        onClick={() => setShowSearchHits(true)}
+        onChange={(e) => {
+          refine(e.currentTarget.value);
+        }}
+      />
     </div>
   );
 };
 
-export default SearchBar;
+export default connectSearchBox(SearchBar);
