@@ -5,11 +5,17 @@ import { client } from "../../lib/client";
 import { algolia } from "../../lib/algolia";
 import { NextResponse } from "next/server";
 
-export async function POST(req) {
+export function POST(req) {
   const sanityAlgolia = indexer(
     {
       product: {
         index: algolia.initIndex("dev_gamestore"),
+        projection: `
+          name,
+          "path": slug.current,
+          image,
+          price
+        `,
       },
     },
     (document) => {
@@ -17,20 +23,20 @@ export async function POST(req) {
         case "product":
           return {
             name: document.name,
-            slug: document.slug.current,
+            path: document.path,
             price: document.price,
             image: document.image,
           };
         default:
-          throw new Error(`Unknown type: ${document._type}`);
+          return document;
       }
     }
   );
 
-  try {
-    let res = await sanityAlgolia.webhookSync(client, req.body);
-    return NextResponse.json(res);
-  } catch (error) {
-    return NextResponse.json({ error: error });
-  }
+  return sanityAlgolia
+    .webhookSync(client, req.body)
+    .then(() => NextResponse.json({ msg: "lessgoo" }))
+    .catch((err) => {
+      return NextResponse.json({ err: err });
+    });
 }

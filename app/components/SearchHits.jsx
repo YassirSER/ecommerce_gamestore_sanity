@@ -9,6 +9,7 @@ function SearchHits({ searchState, searchResults }) {
   const validQuery = searchState.query?.length >= 3;
 
   const getLink = (hit) => {
+    console.log(hit);
     const link = `https://cdn.sanity.io/images/260v8qz7/production/${hit.image[0].asset._ref
       .slice(6)
       .replaceAll("-", ".")
@@ -21,12 +22,9 @@ function SearchHits({ searchState, searchResults }) {
       {searchResults?.hits.length === 0 && <div>No results found!</div>}
       {searchResults?.hits.length > 0 &&
         searchResults.hits.map((hit) => (
-          <div key={hit["slug.current"]} className="suggestion">
+          <div key={hit.path} className="suggestion">
             <img src={getLink(hit)} className="search-img" />
-            <Link
-              href={`/product/${hit["slug.current"]}`}
-              className="search-name"
-            >
+            <Link href={`/product/${hit.path}`} className="search-name">
               {hit.name}
             </Link>
             <div className="search-price">{hit.price}MAD</div>
