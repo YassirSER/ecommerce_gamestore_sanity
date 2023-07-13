@@ -21,7 +21,7 @@ function SearchHits({ searchState, searchResults }) {
       {searchResults?.hits.length === 0 && <div>No results found!</div>}
       {searchResults?.hits.length > 0 &&
         searchResults.hits.map((hit) => (
-          <div key={hit.objectID} className="suggestion">
+          <div key={hit["slug.current"]} className="suggestion">
             <img src={getLink(hit)} className="search-img" />
             <Link
               href={`/product/${hit["slug.current"]}`}
