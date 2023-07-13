@@ -40,7 +40,7 @@ const Navbar = () => {
     setShowSideMenu((current) => !current);
   };
 
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window?.innerWidth);
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);
