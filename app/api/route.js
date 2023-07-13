@@ -5,10 +5,10 @@ import { client } from "../../lib/client";
 import { algolia } from "../../lib/algolia";
 import { NextResponse } from "next/server";
 
-export function POST(req) {
+export async function POST(req) {
   const sanityAlgolia = indexer(
     {
-      post: {
+      product: {
         index: algolia.initIndex("dev_gamestore"),
       },
     },
@@ -27,7 +27,10 @@ export function POST(req) {
     }
   );
 
-  return sanityAlgolia
-    .webhookSync(client, req.body)
-    .then(() => NextResponse.status(200).send("ok"));
+  try {
+    let res = await sanityAlgolia.webhookSync(client, req.body);
+    return NextResponse.json(res);
+  } catch (error) {
+    return NextResponse.json({ error: error });
+  }
 }
