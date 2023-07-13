@@ -1,8 +1,8 @@
 import algoliasearch from "algoliasearch";
 import sanityClient from "@sanity/client";
 import indexer from "sanity-algolia";
-import { client } from "../../../lib/client";
-import { algolia } from "../../../lib/algolia";
+import { client } from "../../lib/client";
+import { algolia } from "../../lib/algolia";
 
 export default function handler(req, res) {
   const sanityAlgolia = indexer(
