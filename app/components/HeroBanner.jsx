@@ -10,19 +10,18 @@ const HeroBanner = ({ heroBanner }) => {
       style={{ backgroundImage: `url(${urlLink})` }}
     >
       <div>
-        <p className="beats-solo">{heroBanner.smallText}</p>
+        {/* <p className="beats-solo">{heroBanner.smallText}</p> */}
         <h3>{heroBanner.midText}</h3>
         <h1>{heroBanner.largeText1}</h1>
 
-        <div>
+        {/* <div>
           <Link href={`/product/${heroBanner.product}`}>
             <button type="button">{heroBanner.buttonText}</button>
           </Link>
-          {/* <div className="desc">
-              <h5>Description</h5>
+          <div className="desc">
             <p>{heroBanner.desc}</p>
           </div> */}
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

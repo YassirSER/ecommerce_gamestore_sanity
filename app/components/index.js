@@ -12,3 +12,5 @@ export { default as SearchBar } from "./SearchBar";
 export { default as SearchHits } from "./SearchHits";
 export { default as Search } from "./Search";
 export { default as SideMenu } from "./SideMenu";
+export { default as Category } from "./Category";
+export { default as CategoryDropdown } from "./CategoryDropdown";

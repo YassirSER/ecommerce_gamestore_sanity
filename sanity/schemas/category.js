@@ -1,6 +1,6 @@
 export default {
-  name: 'product',
-  title: 'Product',
+  name: 'category',
+  title: 'Category',
   type: 'document',
   fields: [
     {
@@ -25,27 +25,6 @@ export default {
         source: 'name',
         maxLength: 90,
       },
-    },
-    {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{type: 'category'}],
-        },
-      ],
-    },
-    {
-      name: 'price',
-      title: 'Price',
-      type: 'number',
-    },
-    {
-      name: 'details',
-      title: 'Details',
-      type: 'string',
     },
   ],
 }

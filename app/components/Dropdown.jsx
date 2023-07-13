@@ -2,9 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-
 import "../styles/Dropdown.css";
-
 const CloseIcon = () => {
   return (
     <svg height="20" width="20" viewBox="0 0 20 20">

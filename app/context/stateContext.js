@@ -13,6 +13,7 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
   const [showSideMenu, setShowSideMenu] = useState(false);
+  const [showSearchbarState, setShowSearchbarState] = useState(false);
 
   let foundProduct;
   let index;
@@ -118,6 +119,8 @@ export const StateContext = ({ children }) => {
         setShowSearchHits,
         showSideMenu,
         setShowSideMenu,
+        showSearchbarState,
+        setShowSearchbarState,
       }}
     >
       {children}

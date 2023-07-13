@@ -15,7 +15,7 @@ const ProductsWithSorting = ({ products }) => {
     }
   };
   return (
-    <>
+    <div className="bottom-products-container">
       {products.length >= 1 && (
         <div className="sorting-container">
           <p>Results found: {products.length}</p>
@@ -43,7 +43,7 @@ const ProductsWithSorting = ({ products }) => {
               <Product key={product._id} product={product} />
             ))}
       </div>
-    </>
+    </div>
   );
 };
 

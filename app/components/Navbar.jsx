@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-
-import { useRouter } from "next/navigation";
 
 import { AiOutlineShopping } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
@@ -21,36 +19,40 @@ const Navbar = () => {
     totalQuantities,
     setShowSideMenu,
     showSideMenu,
+    showSearchbarState,
+    setShowSearchbarState,
   } = useStateContext();
-  const navbar = useRef();
-  const hambLine = useRef();
-  const [searchParam, setSearchParam] = useState("");
   const [searchIconState, setSearchIconState] = useState("search");
-  const router = useRouter();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    router.push(`/search?name=${encodeURIComponent(searchParam)}`);
-    setSearchParam("");
-  };
 
   const showSearchbar = (e) => {
     e.preventDefault();
-    let navbarNode = navbar.current;
 
-    navbarNode.classList.toggle("opensearch");
-    // logoNode.classList.toggle("opensearch");
-
-    if (navbarNode.classList.contains("opensearch")) {
+    if (searchIconState === "search") {
       setSearchIconState("times");
+      setShowSearchbarState(true);
     } else {
       setSearchIconState("search");
+      setShowSearchbarState(false);
     }
   };
 
   const handleChange = (e) => {
     setShowSideMenu((current) => !current);
   };
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 800;
 
   return (
     <nav className="navbar-container">
@@ -72,27 +74,27 @@ const Navbar = () => {
           <Link href="/">GameStore</Link>
         </p>
 
-        <input
-          type="text"
-          className="big-input"
-          placeholder="Search..."
-          onChange={(e) => setSearchParam(e.target.value)}
-          onSubmit={handleSubmit}
-          ref={navbar}
-        />
-
-        <Search inputClassname="searchbar" />
+        {isMobile ? (
+          <Search appearance="mobile" />
+        ) : (
+          <Search appearance="desktop" />
+        )}
       </div>
 
       <div>
         {searchIconState === "search" ? (
           <IoSearchOutline className="search-icon-sm" onClick={showSearchbar} />
         ) : (
-          <FaTimes
-            className="times-icon-sm"
-            color="black"
-            onClick={showSearchbar}
-          />
+          <>
+            {/* <Search appearance="mobile" /> */}
+            <FaTimes
+              className="times-icon-sm"
+              // color="black"
+              fill="white"
+              stroke="white"
+              onClick={showSearchbar}
+            />
+          </>
         )}
         <button
           className="cart-icon"

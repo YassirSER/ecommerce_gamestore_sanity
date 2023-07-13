@@ -2,12 +2,15 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
+import { FaTimes } from "react-icons/fa";
 import { connectSearchBox } from "react-instantsearch-dom";
 import { useStateContext } from "../context/stateContext";
 
 const SearchBar = ({ refine, inputClassname }) => {
-  const { showSearchHits, setShowSearchHits } = useStateContext();
+  const { showSearchHits, setShowSearchHits, showSearchbarState } =
+    useStateContext();
   const searchHitsRef = useRef();
+  const inputRef = useRef();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -17,11 +20,19 @@ const SearchBar = ({ refine, inputClassname }) => {
   });
 
   const handleClickOutside = (e) => {
+    if (showSearchbarState) {
+      inputRef?.current.focus();
+    }
     if (!searchHitsRef.current.contains(e.target)) {
       setShowSearchHits(false);
     } else {
       setShowSearchHits(true);
     }
+  };
+
+  const handleClick = () => {
+    inputRef.current.value = "";
+    // setShowSearchHits(false);
   };
 
   return (
@@ -33,14 +44,16 @@ const SearchBar = ({ refine, inputClassname }) => {
       }
       ref={searchHitsRef}
     >
-      <IoSearchOutline className="search-icon" />
+      <IoSearchOutline className="search-icon" fill="white" stroke="white" />
       <input
         type="text"
         className={inputClassname}
-        // ref={inputRef}
+        ref={inputRef}
         // value={searchParam}
         placeholder="Search"
-        onClick={() => setShowSearchHits(true)}
+        onClick={() => {
+          setShowSearchHits(true);
+        }}
         onChange={(e) => {
           refine(e.currentTarget.value);
         }}

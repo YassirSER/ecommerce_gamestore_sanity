@@ -1,46 +1,71 @@
+"use client";
+
+import React, { useState } from "react";
+import { CategoryDropdown } from "./index";
+import { IoIosArrowDown } from "react-icons/io";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
 
 const CategoriesHeader = () => {
-  const pathname = usePathname();
+  const [gamesDd, setGamesDd] = useState(false);
+  const [gcDd, setGcDd] = useState(false);
+  const [gpDd, setGpDd] = useState(false);
 
   return (
-    <div className="categories-container">
-      <div className="category">
-        <Link
-          href="/products/xboxgame"
-          className={pathname.startsWith("/products/xboxgame") ? "active" : ""}
+    <>
+      <div className="categories-container">
+        <div
+          className="category games-category"
+          onMouseEnter={() => setGamesDd(true)}
+          onMouseLeave={() => setGamesDd(false)}
         >
-          Xbox games
-        </Link>
-      </div>
-      <div className="category">
-        <Link
-          href="/products/steamgame"
-          className={pathname.startsWith("/products/steamgame") ? "active" : ""}
+          Games
+          <IoIosArrowDown />
+          {gamesDd && (
+            <div className="games-data">
+              <CategoryDropdown
+                categoryType={"game-category"}
+                category={"gameCategories"}
+              />
+            </div>
+          )}
+        </div>
+        <div
+          className="category giftcards-category"
+          onMouseEnter={() => setGcDd(true)}
+          onMouseLeave={() => setGcDd(false)}
         >
-          Steam games
-        </Link>
-      </div>
-      <div className="category">
-        <Link
-          href="/products/psgame"
-          className={pathname.startsWith("/products/psgame") ? "active" : ""}
+          Gift Cards
+          <IoIosArrowDown />
+          {gcDd && (
+            <div className="games-data">
+              <CategoryDropdown
+                categoryType={"game-category"}
+                category={"gcCategories"}
+              />
+            </div>
+          )}
+        </div>
+        <div
+          className="category gp-category"
+          onMouseEnter={() => setGpDd(true)}
+          onMouseLeave={() => setGpDd(false)}
         >
-          {" "}
-          PS games{" "}
-        </Link>
-      </div>
-      <div className="category">
-        <Link
-          href="/products/software"
-          className={pathname.startsWith("/products/software") ? "active" : ""}
-        >
+          Game Points
+          <IoIosArrowDown />
+          {gpDd && (
+            <div className="games-data">
+              <CategoryDropdown
+                categoryType={"game-category"}
+                category={"gpCategories"}
+              />
+            </div>
+          )}
+        </div>
+        <Link href="/products/software" className="category software-category">
           Software
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 
