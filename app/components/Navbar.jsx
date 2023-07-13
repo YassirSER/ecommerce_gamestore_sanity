@@ -11,6 +11,7 @@ import { useStateContext } from "../context/stateContext";
 import { Cart } from "./index";
 
 import Search from "./Search";
+import useDeviceSize from "../../lib/useDeviceSize";
 
 const Navbar = () => {
   const {
@@ -23,6 +24,8 @@ const Navbar = () => {
     setShowSearchbarState,
   } = useStateContext();
   const [searchIconState, setSearchIconState] = useState("search");
+
+  const [width, height] = useDeviceSize();
 
   const showSearchbar = (e) => {
     e.preventDefault();
@@ -40,17 +43,17 @@ const Navbar = () => {
     setShowSideMenu((current) => !current);
   };
 
-  const [width, setWidth] = useState(window?.innerWidth);
+  // const [width, setWidth] = useState();
 
-  function handleWindowSizeChange() {
-    setWidth(window?.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
+  // function handleWindowSizeChange() {
+  //   typeof window !== "undefined" && setWidth(window.innerWidth);
+  // }
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleWindowSizeChange);
+  //   return () => {
+  //     window.removeEventListener("resize", handleWindowSizeChange);
+  //   };
+  // }, []);
 
   const isMobile = width <= 800;
 
