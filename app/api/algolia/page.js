@@ -27,6 +27,6 @@ export default function handler(req, res) {
   );
 
   return sanityAlgolia
-    .webhookSync(client, req.body)
-    .then(() => res.status(200).send("ok"));
+    .webhookSync(client, req?.body)
+    .then(() => res?.status(200).send("ok"));
 }
