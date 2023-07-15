@@ -10,7 +10,7 @@ function SearchHits({ searchState, searchResults }) {
 
   const getLink = (hit) => {
     console.log(hit);
-    const link = `https://cdn.sanity.io/images/260v8qz7/production/${hit.image[0].asset._ref
+    const link = `https://cdn.sanity.io/images/260v8qz7/production/${hit?.image[0].asset._ref
       .slice(6)
       .replaceAll("-", ".")
       .replace(".", "-")}`;
