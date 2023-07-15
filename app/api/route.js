@@ -1,14 +1,8 @@
-import algoliasearch from "algoliasearch";
 import indexer from "sanity-algolia";
-import { client } from "../../lib/client";
 import { NextResponse } from "next/server";
 
-import algoliasearch from "algoliasearch";
-
-export const algolia = algoliasearch(
-  "P70RWENSTV",
-  process.env.NEXT_PUBLIC_ADMIN_API_ALGOLIA
-);
+import { client } from "../../lib/client";
+import { algolia } from "../../lib/algolia";
 
 export async function POST(req) {
   try {
