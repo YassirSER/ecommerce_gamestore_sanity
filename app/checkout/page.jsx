@@ -12,7 +12,7 @@ import Script from "next/script";
 
 import { client, urlFor } from "../../lib/client";
 import { useStateContext } from "../context/stateContext";
-import PaymentNotification from "../../emails/paymentNotification";
+import PaymentNotification from "../../emails/PaymentNotification";
 import PurchaseNotificationForMe from "../../emails/PurchaseNotificationForMe";
 import { LoadingSpinner } from "../../components/index";
 
