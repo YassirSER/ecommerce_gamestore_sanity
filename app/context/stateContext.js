@@ -14,6 +14,7 @@ export const StateContext = ({ children }) => {
   const [qty, setQty] = useState(1);
   const [showSideMenu, setShowSideMenu] = useState(false);
   const [showSearchbarState, setShowSearchbarState] = useState(false);
+  const [order, setOrder] = useState();
 
   let foundProduct;
   let index;
@@ -121,6 +122,8 @@ export const StateContext = ({ children }) => {
         setShowSideMenu,
         showSearchbarState,
         setShowSearchbarState,
+        order,
+        setOrder,
       }}
     >
       {children}

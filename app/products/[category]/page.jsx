@@ -1,12 +1,12 @@
 import React from "react";
 
 import { client } from "../../../lib/client";
-import { ProductsWithSorting } from "../../components/index";
+import { ProductsWithSorting } from "../../../components/index";
 import {
   gameCategories,
   gcCategories,
   gpCategories,
-} from "../../categories/categories";
+} from "../../staticData/categories";
 
 const ProductCategorised = async ({ params: { category } }) => {
   const products = await getProductsByCategory(category);
@@ -58,14 +58,14 @@ const ProductCategorised = async ({ params: { category } }) => {
 };
 
 const getProductsByCategory = async (category) => {
-  const productsQuery = `*[_type=="product" && count((categories[]->slug.current)[@ in ["${category}"]]) > 0] {
-    name,
-    price,
-    image,
-    slug
-  }`;
+  const query = `*[_type=="product" && count((categories[]->slug.current)[@ in ["${category}"]]) > 0] {
+        name,
+         price,
+         image,
+         slug
+       }`;
 
-  const products = await client.fetch(productsQuery);
+  const products = await client.fetch(query);
 
   return products;
 };

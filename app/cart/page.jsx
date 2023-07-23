@@ -1,33 +1,25 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { useStateContext } from "../context/stateContext";
 import { urlFor } from "../../lib/client";
 
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineLeft,
-  AiOutlineShopping,
-} from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 import { GiTrashCan } from "react-icons/gi";
 import Link from "next/link";
 
-const Checkout = () => {
-  const {
-    totalPrice,
-    totalQuantities,
-    cartItems,
-    setShowCart,
-    toggleCartItemQuantity,
-    onRemove,
-  } = useStateContext();
+const Cart = () => {
+  const { totalPrice, cartItems, toggleCartItemQuantity, onRemove } =
+    useStateContext();
+
+  const router = useRouter();
 
   return (
-    <div className="checkout-container">
-      <div className="checkout-products-container">
+    <div className="cart-page-container">
+      <div className="cart-products-container">
         <h2 className="cart-products-header">Products</h2>
         <div className="product-container">
           {cartItems.length >= 1 &&
@@ -36,6 +28,7 @@ const Checkout = () => {
                 <img
                   src={urlFor(item?.image[0])}
                   className="checkout-product-image"
+                  onClick={() => router.push("/product/" + item.slug.current)}
                 />
                 <div className="item-desc">
                   <div className="flex top">
@@ -83,12 +76,15 @@ const Checkout = () => {
           <p>TOTAL</p>
           <div className="subtotal">{totalPrice}MAD</div>
         </div>
-        <button className="purchase-btn">
-          <Link href={"/checkout"}>PURCHASE</Link>
+        <button
+          className="purchase-btn"
+          // disabled={totalPrice > 0 ? false : true}
+        >
+          <Link href={totalPrice > 0 ? "/checkout" : "/"}>PURCHASE</Link>
         </button>
       </div>
     </div>
   );
 };
 
-export default Checkout;
+export default Cart;

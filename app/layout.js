@@ -6,8 +6,9 @@ import NextTopLoader from "nextjs-toploader";
 
 import "./globals.css";
 
-import Layout from "./components/Layout";
+import { Layout } from "../components/index";
 import { StateContext } from "./context/stateContext";
+import Script from "next/script";
 
 const metropolis = localFont({
   src: "./fonts/metropolis/Metropolis-Regular.woff2",

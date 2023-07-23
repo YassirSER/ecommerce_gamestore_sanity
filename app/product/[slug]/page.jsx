@@ -1,7 +1,7 @@
 import React from "react";
 
 import { client } from "../../../lib/client";
-import { ProductDetailsClient } from "../../components";
+import { ProductDetailsClient } from "../../../components/index";
 
 const ProductDetails = async ({ params: { slug } }) => {
   const { products, product } = await getProducts(slug);
