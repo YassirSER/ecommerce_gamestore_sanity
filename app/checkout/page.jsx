@@ -90,9 +90,11 @@ const Checkout = () => {
 
   const { cartItems, totalPrice, setOrder, order } = useStateContext();
 
-  if (totalPrice === 0) {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (totalPrice === 0) {
+      router.push("/");
+    }
+  }, []);
 
   const onSubmit = async (data) => {
     setLoading(true);
