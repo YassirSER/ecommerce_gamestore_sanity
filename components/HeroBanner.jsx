@@ -1,27 +1,43 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { urlFor } from "../lib/client";
+import Image from "next/image";
 
-const HeroBanner = ({ heroBanner }) => {
-  let urlLink = urlFor(heroBanner.image).url();
+import XboxBanner from "../public/digitalcitybanner1.png";
+import PsnBanner from "../public/psdigitalcitybanner.png";
+
+const HeroBanner = () => {
+  const [banner, setBanner] = useState("xbox");
+
+  const bannerSetter = () => {
+    if (banner === "xbox") {
+      return XboxBanner;
+    } else {
+      return PsnBanner;
+    }
+  };
   return (
-    <div
-      className="hero-banner-container"
-      style={{ backgroundImage: `url(${urlLink})` }}
-    >
-      <div>
-        {/* <p className="beats-solo">{heroBanner.smallText}</p> */}
-        <h3>{heroBanner.midText}</h3>
-        <h1>{heroBanner.largeText1}</h1>
-
-        {/* <div>
-          <Link href={`/product/${heroBanner.product}`}>
-            <button type="button">{heroBanner.buttonText}</button>
-          </Link>
-          <div className="desc">
-            <p>{heroBanner.desc}</p>
-          </div> */}
-        {/* </div> */}
+    <div>
+      <div className="hero-banner-container">
+        <Link href={"/products/" + banner + "games"}>
+          <Image
+            src={bannerSetter()}
+            alt={"digital city " + banner + " games and gift cards"}
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Link>
+        <div className="hero-banner-buttons">
+          <button
+            className={banner === "xbox" ? "hero-btn active-hero" : "hero-btn"}
+            onClick={() => setBanner("xbox")}
+          ></button>
+          <button
+            className={banner === "psn" ? "hero-btn active-hero" : "hero-btn"}
+            onClick={() => setBanner("psn")}
+          ></button>
+          {/* <button className="hero-btn" onClick={() => setBanner("xboxbanner")}></button> */}
+        </div>
       </div>
     </div>
   );

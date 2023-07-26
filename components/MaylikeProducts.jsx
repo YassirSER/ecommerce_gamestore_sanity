@@ -19,6 +19,7 @@ const MaylikeProducts = ({ product }) => {
             alt={product.name}
           />
           <p className="maylike-product-name">{product.name}</p>
+          <p className="maylike-product-region">{product.region}</p>
           <p className="maylike-product-price">{product.price}MAD</p>
         </div>
       </Link>

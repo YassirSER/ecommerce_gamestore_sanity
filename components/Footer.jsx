@@ -31,7 +31,7 @@ const Footer = () => {
             <span style={{ color: "54595F" }}>
               <AiOutlineMail /> Email:
             </span>{" "}
-            gamestoremaroc@hotmail.com
+            digitalcitymaroc@hotmail.com
           </p>
         </div>
         <div className="footer-payment-container">

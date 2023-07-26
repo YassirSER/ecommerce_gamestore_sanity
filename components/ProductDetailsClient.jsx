@@ -7,6 +7,7 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
+import Image from "next/image";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -15,8 +16,14 @@ import { urlFor } from "../lib/client";
 import { useStateContext } from "../app/context/stateContext";
 import { MaylikeProducts } from "./index";
 
+import Europe from "../public/europe.svg";
+import Argentina from "../public/argentina.svg";
+import Turkey from "../public/turkey.svg";
+import Global from "../public/global.svg";
+import Link from "next/link";
+
 const ProductDetailsClient = ({ products, product }) => {
-  const { image, name, details, price } = product;
+  const { image, name, details, price, region } = product;
   const [index, setIndex] = useState(0);
 
   const { decQty, incQty, qty, onAdd } = useStateContext();
@@ -26,7 +33,7 @@ const ProductDetailsClient = ({ products, product }) => {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 1024 },
       items: 5,
-      slidesToSlide: 2,
+      // slidesToSlide: 2,
     },
     desktop: {
       breakpoint: { max: 1024, min: 800 },
@@ -48,6 +55,18 @@ const ProductDetailsClient = ({ products, product }) => {
   const productsData = products.map((item) => (
     <MaylikeProducts key={item._id} product={item} />
   ));
+
+  const findRegion = () => {
+    if (region === "EUROPE") {
+      return Europe;
+    } else if (region === "ARGENTINA") {
+      return Argentina;
+    } else if (region === "TURKEY") {
+      return Turkey;
+    } else if (region === "GLOBAL") {
+      return Global;
+    }
+  };
 
   return (
     <div>
@@ -85,8 +104,36 @@ const ProductDetailsClient = ({ products, product }) => {
             </div>
             <p>(20)</p>
           </div>
+          <p style={{ display: "flex", alignItems: "center" }}>
+            {/* Region:{" "} */}
+            <Image
+              src={findRegion()}
+              style={{
+                width: "40px",
+                height: "40px",
+                padding: region === "GLOBAL" ? "10px" : "0",
+              }}
+            />{" "}
+            <span
+              style={{
+                color: "#05b293",
+                fontWeight: "600",
+                fontSize: "0.9rem",
+              }}
+            >
+              {region}
+            </span>
+          </p>
           <h4>Details: </h4>
           <p>{details}</p>
+          <h4>How to activate: </h4>
+          <p>
+            to activate the product, please check the{" "}
+            <Link href={"/faq"} style={{ color: "blueviolet" }}>
+              faq's
+            </Link>{" "}
+            activation guide.
+          </p>
           <p className="price">{price}MAD</p>
           <div className="quantity">
             <h3>Quantity:</h3>

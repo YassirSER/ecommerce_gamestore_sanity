@@ -18,6 +18,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'region',
+      title: 'Region',
+      type: 'string',
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',

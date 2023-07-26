@@ -11,8 +11,17 @@ import {
   Category,
   HeroBanner,
 } from "../components/index";
+// import HeroBanner from "../components/HeroBanner";
+
 import Link from "next/link";
 import Image from "next/image";
+import DownCategories from "../components/downCategories";
+// import { Metadata } from "next";
+
+export const metadata = {
+  title: "digital city homepage",
+  description: "digital city homepage xbox games and psn games for cheap !",
+};
 
 export const revalidate = 60;
 
@@ -20,6 +29,7 @@ const xboxquery = `*[_type=="product" && count((categories[]->slug.current)[@ in
   name,
   price,
   image,
+  region,
   slug
 } | order(_id) [0...5]`;
 
@@ -27,23 +37,26 @@ const psquery = `*[_type=="product" && count((categories[]->slug.current)[@ in [
   name,
   price,
   image,
-  slug
+  slug,
+  region
 } | order(_id) [0...5]`;
 
 const Home = async () => {
   const xboxProductsData = await client.fetch(xboxquery);
   const psProductsData = await client.fetch(psquery);
 
-  const bannerQuery = '*[_type == "banner"]';
-  const bannerData = await client.fetch(bannerQuery);
-
   const categoryQuery = '*[_type == "category"]';
   const categoryData = await client.fetch(categoryQuery);
 
+  // const headersList = headers();
+  // const userAgent = headersList.get("user-agent");
+
   return (
     <>
-      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
-      <div className="requestgame-container">
+      <HeroBanner />
+
+      <DownCategories />
+      {/* <div className="requestgame-container">
         <h2 style={{ fontSize: "2rem", padding: "20px" }}>
           Didn't find what you wish for ?
         </h2>
@@ -54,7 +67,7 @@ const Home = async () => {
           </Link>{" "}
           page
         </h4>
-      </div>
+      </div> */}
 
       <div className="famous-categories-heading">
         <h2>CATEGORIES</h2>
@@ -67,23 +80,22 @@ const Home = async () => {
       </div>
 
       <div className="instantdelivery-container">
-        <Image
-          src={SecurePayment}
-          style={{ width: "150px", height: "100px" }}
-          alt="secure payment icon"
-        />
-        <Image
-          src={InstantDelivery}
-          className="instantdelivery"
-          width={200}
-          style={{ height: "100px", width: "150px" }}
-          alt="fast delivery icon"
-        />
-        <Image
-          src={customerService}
-          style={{ height: "100px", width: "150px" }}
-          alt="customer service icon"
-        />
+        <div>
+          <Image src={SecurePayment} alt="secure payment icon" />
+          <h4 style={{ padding: "5px" }}>SECURE PAYMENT</h4>
+        </div>
+        <div>
+          <Image
+            src={InstantDelivery}
+            className="instantdelivery"
+            alt="fast delivery icon"
+          />
+          <h4 style={{ padding: "10px" }}>FAST DELIVERY</h4>
+        </div>
+        <div>
+          <Image src={customerService} alt="customer service icon" />
+          <h4 style={{ padding: "10px" }}>CUSTOMER SERVICE</h4>
+        </div>
       </div>
 
       <div className="products-heading">

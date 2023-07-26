@@ -69,8 +69,8 @@ a {
   padding: 15px;
   height: 15vh;
   position: relative;
-  color: white;
-  background-color: #121212;
+  /* color: white; */
+  background-color: #fafafa;
 }
 
 .marquee-text {
@@ -108,6 +108,35 @@ a {
 span.text-red {
   -webkit-text-stroke: 1px #f02d34;
   margin-left: 6px;
+}
+.hero-banner-buttons {
+  position: absolute;
+  z-index: 10;
+  bottom: 20px;
+  /* left: 50%; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.down-categories-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding: 20px 30px;
+  gap: 20px;
+  /* grid-template-rows: 250px; */
+}
+.netflixbg {
+  grid-column-start: 2;
+}
+.itunesbg {
+  grid-column-start: 1;
+}
+.down-categories-container img {
+  width: 100%;
+  height: 100%;
+}
+.active-hero {
+  padding: 7px 15px !important;
 }
 .logo {
   color: white;
@@ -434,9 +463,8 @@ span.text-red {
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: #121212;
-  border: 1px solid #414141;
-  border-radius: 5px;
+  background-color: #fff;
+  /* border-radius: 5px; */
 }
 
 .shadow {
@@ -447,8 +475,8 @@ span.text-red {
   position: absolute;
   padding: 10px;
   /* border: 1px solid #4618ac; */
-  border-top: none;
-  background-color: rgba(1, 1, 1, 0.5);
+  /* border-top: none; */
+  /* background-color: rgba(1, 1, 1, 0.5); */
   z-index: 6;
   width: 100%;
   max-height: 60vh;
@@ -456,6 +484,10 @@ span.text-red {
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.2;
+  background-color: white;
+  /* border: 1px solid black; */
+  border-top: 1px solid black;
+  color: black;
 }
 
 .suggestion {
@@ -506,10 +538,9 @@ span.text-red {
 .searchbar {
   font-size: 15px;
   width: 100%;
-  background-color: #121212;
+  /* background-color: #121212; */
   padding: 20px;
   border: none;
-  color: white;
 }
 
 input:focus {
@@ -655,28 +686,37 @@ header {
 }
 
 .hero-banner-container {
-  padding: 100px 40px;
   position: relative;
-  height: 500px;
+  height: fit-content;
   line-height: 0.9;
   width: 100%;
-  background-size: auto 500px;
+  /* background-size: auto 500px; */
   /* background-repeat: no-repeat; */
+}
+.hero-banner-container a {
+  width: 100%;
+}
+.hero-banner-container img {
+  width: 100%;
+  height: 100%;
 }
 .hero-banner-container .beats-solo {
   font-size: 20px;
 }
 .hero-banner-container button {
   border-radius: 15px;
-  padding: 10px 16px;
-  background-color: #f02d34;
+  padding: 7px;
+  background-color: gray;
+  margin: 5px 2px;
   color: white;
   border: none;
-  margin-top: 40px;
-  font-size: 18px;
-  font-weight: 500;
   cursor: pointer;
   z-index: 10000 !important;
+}
+
+.hero-banner-container button:hover {
+  /* padding: 7px 15px; */
+  background-color: #725eae;
 }
 
 .hero-banner-container h3 {
@@ -956,6 +996,15 @@ header {
   align-items: center;
   flex-wrap: wrap;
 }
+.instantdelivery-container img {
+  width: 48px;
+  height: 48px;
+}
+.instantdelivery-container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 textarea:focus {
   outline: none;
 }
@@ -1233,6 +1282,18 @@ textarea:focus {
 .btn:hover {
   transform: scale(1.1, 1.1);
 }
+.product-region {
+  color: #05b293;
+  font-weight: 600;
+  padding: 0px 5px;
+  font-size: 0.9rem;
+}
+.maylike-product-region {
+  color: #05b293;
+  font-weight: 600;
+  padding: 0px 5px;
+  font-size: 0.9rem;
+}
 .product-detail-container {
   display: flex;
   gap: 40px;
@@ -1277,6 +1338,7 @@ textarea:focus {
 
 .product-detail-desc h4 {
   margin-top: 10px;
+  font-weight: 600;
 }
 .product-detail-desc p {
   margin-top: 10px;
@@ -1291,13 +1353,6 @@ textarea:focus {
   font-size: 26px;
   margin-top: 30px;
   /* color: #fad318; */
-}
-.price .old-price,
-.product-price .old-price,
-.price .old-price,
-.maylike-product-price {
-  color: gray;
-  text-decoration: line-through;
 }
 .product-detail-desc .quantity {
   display: flex;
@@ -1611,6 +1666,12 @@ textarea:focus {
     font-size: 50px;
     margin-left: 5px;
   }
+  .product-region {
+    position: absolute;
+    bottom: 40%;
+    left: 70px;
+    font-size: 0.7rem;
+  }
   .footer-container {
     flex-direction: column;
   }
@@ -1633,6 +1694,9 @@ textarea:focus {
   .banner-desc .left p {
     margin: 18px;
   }
+  .down-categories-container {
+    grid-template-rows: 100%;
+  }
   .banner-desc .right h3 {
     font-size: 45px;
   }
@@ -1653,6 +1717,7 @@ textarea:focus {
     line-height: 1.3;
     display: flex;
     justify-content: center;
+    padding: 20px 0px;
   }
   .hero-banner-container h1 {
     font-size: 1.5rem;

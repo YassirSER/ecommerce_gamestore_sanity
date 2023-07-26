@@ -62,7 +62,8 @@ const getProductsByCategory = async (category) => {
         name,
          price,
          image,
-         slug
+         slug,
+         region
        }`;
 
   const products = await client.fetch(query);

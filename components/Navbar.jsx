@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 import { AiOutlineShopping } from "react-icons/ai";
@@ -11,7 +11,9 @@ import { useStateContext } from "../app/context/stateContext";
 import { Cart } from "./index";
 
 import Search from "./Search";
+import Logo from "../public/logo-black.png";
 import useDeviceSize from "../lib/useDeviceSize";
+import Image from "next/image";
 
 const Navbar = () => {
   const {
@@ -62,7 +64,9 @@ const Navbar = () => {
           />
         )}
         <p className="logo">
-          <Link href="/">Digital City</Link>
+          <Link href="/">
+            <Image src={Logo} style={{ width: "100%", height: "100%" }} />
+          </Link>
         </p>
 
         {isMobile ? (
@@ -81,8 +85,8 @@ const Navbar = () => {
             <FaTimes
               className="times-icon-sm"
               // color="black"
-              fill="white"
-              stroke="white"
+              fill="black"
+              stroke="black"
               onClick={showSearchbar}
             />
           </>
@@ -92,7 +96,7 @@ const Navbar = () => {
           type="button"
           onClick={() => setShowCart(true)}
         >
-          <AiOutlineShopping />
+          <AiOutlineShopping fill="black" stroke="black" />
           <span className="cart-item-qty">{totalQuantities}</span>
         </button>
       </div>

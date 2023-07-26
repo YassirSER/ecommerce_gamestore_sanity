@@ -44,7 +44,7 @@ const SearchBar = ({ refine, inputClassname }) => {
       }
       ref={searchHitsRef}
     >
-      <IoSearchOutline className="search-icon" fill="white" stroke="white" />
+      <IoSearchOutline className="search-icon" fill="black" stroke="black" />
       <input
         type="text"
         className={inputClassname}

@@ -2,6 +2,10 @@
 
 import React, { useState } from "react";
 
+import { render } from "@react-email/render";
+import ContactmeMessage from "../../emails/ContactmeMessage";
+import Link from "next/link";
+
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -19,7 +23,15 @@ const Contact = () => {
         body: JSON.stringify({
           subject,
           fromEmail: email,
+          toEmail: "digitalcitymaroc@hotmail.com",
           text: email + ": " + message,
+          html: render(
+            <ContactmeMessage
+              email={email}
+              subject={subject}
+              message={message}
+            />
+          ),
         }),
       });
       setEmail("");
@@ -85,6 +97,12 @@ const Contact = () => {
           </button>
           <p style={{ position: "absolute", right: "0px" }}>{emailRes}</p>
         </div>
+      </div>
+      <div style={{ padding: "20px" }}>
+        or you can see our faq{" "}
+        <Link href={"/faq"} style={{ color: "blueviolet" }}>
+          here
+        </Link>
       </div>
     </form>
   );

@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
   return (
     <div className="layout">
       <Head>
-        <title>GameStore Maroc</title>
+        <title>Digital City</title>
       </Head>
       <header>
         <Navbar />
