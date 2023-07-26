@@ -16,3 +16,4 @@ export { default as Category } from "./Category";
 export { default as CategoryDropdown } from "./CategoryDropdown";
 export { default as MaylikeProducts } from "./MaylikeProducts";
 export { default as LoadingSpinner } from "./LoadingSpinner";
+export { default as DownCategories } from "./DownCategories";

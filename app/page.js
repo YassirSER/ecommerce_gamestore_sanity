@@ -10,12 +10,13 @@ import {
   FooterBanner,
   Category,
   HeroBanner,
+  DownCategories,
 } from "../components/index";
 // import HeroBanner from "../components/HeroBanner";
 
 import Link from "next/link";
 import Image from "next/image";
-import DownCategories from "../components/downCategories";
+// import DownCategories from "../components/downCategories";
 // import { Metadata } from "next";
 
 export const metadata = {
