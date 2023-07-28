@@ -49,9 +49,6 @@ const Home = async () => {
   const categoryQuery = '*[_type == "category"]';
   const categoryData = await client.fetch(categoryQuery);
 
-  // const headersList = headers();
-  // const userAgent = headersList.get("user-agent");
-
   return (
     <>
       <HeroBanner />
@@ -125,7 +122,63 @@ const Home = async () => {
         ))}
       </div>
 
-      {/* <FooterBanner footerBanner={bannerData && bannerData[0]} /> */}
+      <div className="blabla-container">
+        <h1 style={{ fontWeight: "800", fontSize: "1.8rem" }}>
+          DIGITALCITY.MA, the best website for prepaid cards and activation keys
+          in Morocco
+        </h1>
+        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+          <p>
+            Wether it is gift cards, games,{" "}
+            <Link href={"/software"}>Software</Link>, or anything digital, we
+            have it all !
+          </p>
+          <p>
+            You can find everything for the best price in{" "}
+            <Link href={"http://localhost:3000"}>DIGITALCITY.MA</Link>, and all
+            our products are delivered digitally in a matter of a day !
+          </p>
+          <p>
+            <Link href={"/products/psngiftcards"}>PSN Cards</Link>,{" "}
+            <Link href={"/products/psngames"}>PLAYSTATION GAMES</Link>,{" "}
+            <Link href={"/products/xboxgames"}>XBOX GAMES</Link>,{" "}
+            <Link href={"/products/epicgames"}>EPIC GAMES</Link>...
+          </p>
+          <p>
+            Tired of your console ? we have{" "}
+            <Link href={"/products/robloxrobuxgiftcards"}>robux</Link>,{" "}
+            <Link href={"/products/fortnitevbuckscards"}>V-BUCKS</Link>,{" "}
+            <Link href={"/products/netflixgiftcards"}>NETFLIX cards</Link>,{" "}
+            <Link href={"/products/itunesgiftcards"}>Apple & Itunes Cards</Link>
+            , and it's only the tip of the iceberg !
+          </p>
+          <p>
+            Still want more ?! Okay, what about game points ? wether it is{" "}
+            <Link href={"/products/fifafutpoints"}>FIFA FUT points</Link>,{" "}
+            <Link href={"/products/gtaonlinecash"}>GTA online cash</Link> or{" "}
+            <Link href={"/products/riotpoints"}>Riot Points</Link>... just ask
+            and you shall find.
+          </p>
+          <p>
+            You might ask, what about pc ?We got you.{" "}
+            <Link href={"/products/battle.netgames"}>BATTLE.NET</Link>,{" "}
+            <Link href={"/products/steamgames"}>STEAM</Link> as well as{" "}
+            <Link href={"/products/goggames"}>GOG games</Link> are also appart
+            of our catalog !
+          </p>
+        </div>
+        <p
+          style={{
+            width: "100%",
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            textAlign: "center",
+            lineHeight: "30px",
+          }}
+        >
+          IWA CHNO MAZAL KATSNA, SIR 5ODLK CHI 7AJA !
+        </p>
+      </div>
     </>
   );
 };

@@ -53,6 +53,39 @@ export const StateContext = ({ children }) => {
     setQty(1);
   };
 
+  const onCheckoutAdd = (product, quantity) => {
+    const checkProductInCart = cartItems.find(
+      (item) => item._id === product._id
+    );
+
+    setTotalPrice(
+      (prevTotalPrice) => prevTotalPrice + product.price * quantity
+    );
+    setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity);
+
+    if (checkProductInCart) {
+      let doubleProduct;
+      cartItems.forEach((cartProduct) => {
+        if (cartProduct._id === product._id) {
+          cartProduct.quantity += quantity;
+          doubleProduct = cartProduct;
+        }
+      });
+
+      const otherItems = cartItems.filter(
+        (cartProduct) => cartProduct._id !== product._id
+      );
+
+      setCartItems([...otherItems, doubleProduct]);
+    } else {
+      product.quantity = quantity;
+
+      setCartItems([...cartItems, { ...product }]);
+    }
+
+    setQty(1);
+  };
+
   const onRemove = (product) => {
     foundProduct = cartItems.find((item) => item._id === product._id);
     const newCartItems = cartItems.filter((item) => item._id !== product._id);
@@ -124,6 +157,7 @@ export const StateContext = ({ children }) => {
         setShowSearchbarState,
         order,
         setOrder,
+        onCheckoutAdd,
       }}
     >
       {children}

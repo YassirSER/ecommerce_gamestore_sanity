@@ -21,7 +21,7 @@ const Cart = () => {
     <div className="cart-page-container">
       <div className="cart-products-container">
         <h2 className="cart-products-header">Products</h2>
-        <div className="product-container">
+        <div className="product-container-fit">
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>

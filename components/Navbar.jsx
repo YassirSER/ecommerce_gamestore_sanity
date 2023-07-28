@@ -65,7 +65,11 @@ const Navbar = () => {
         )}
         <p className="logo">
           <Link href="/">
-            <Image src={Logo} style={{ width: "100%", height: "100%" }} />
+            <Image
+              src={Logo}
+              style={{ width: "100%", height: "100%" }}
+              alt="DIGITALCITY.MA logo"
+            />
           </Link>
         </p>
 

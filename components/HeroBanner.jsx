@@ -23,6 +23,7 @@ const HeroBanner = () => {
         <Link href={"/products/" + banner + "games"}>
           <Image
             src={bannerSetter()}
+            priority={true}
             alt={"digital city " + banner + " games and gift cards"}
             style={{ width: "100%", height: "100%" }}
           />

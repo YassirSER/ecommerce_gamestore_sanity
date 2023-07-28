@@ -14,19 +14,22 @@ import "react-multi-carousel/lib/styles.css";
 // import Product from "./Product";
 import { urlFor } from "../lib/client";
 import { useStateContext } from "../app/context/stateContext";
-import { MaylikeProducts } from "./index";
+import { LoadingSpinner, MaylikeProducts } from "./index";
 
 import Europe from "../public/europe.svg";
 import Argentina from "../public/argentina.svg";
 import Turkey from "../public/turkey.svg";
 import Global from "../public/global.svg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProductDetailsClient = ({ products, product }) => {
   const { image, name, details, price, region } = product;
   const [index, setIndex] = useState(0);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-  const { decQty, incQty, qty, onAdd } = useStateContext();
+  const { decQty, incQty, qty, onAdd, onCheckoutAdd } = useStateContext();
 
   const responsive = {
     superLargeDesktop: {
@@ -70,7 +73,22 @@ const ProductDetailsClient = ({ products, product }) => {
 
   return (
     <div>
-      <div className="product-detail-container">
+      <div
+        className="product-detail-container"
+        style={{ position: "relative" }}
+      >
+        {loading && (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              zIndex: "5555",
+            }}
+          >
+            <LoadingSpinner />
+          </div>
+        )}
         <div>
           <div className="image-container">
             <img
@@ -78,7 +96,7 @@ const ProductDetailsClient = ({ products, product }) => {
               className="product-detail-image"
             />
           </div>
-          <div className="small-images-container">
+          {/* <div className="small-images-container">
             {image?.map((item, i) => (
               <img
                 key={i}
@@ -89,7 +107,7 @@ const ProductDetailsClient = ({ products, product }) => {
                 onMouseEnter={() => setIndex(i)}
               />
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="product-detail-desc">
@@ -113,6 +131,7 @@ const ProductDetailsClient = ({ products, product }) => {
                 height: "40px",
                 padding: region === "GLOBAL" ? "10px" : "0",
               }}
+              alt="game region"
             />{" "}
             <span
               style={{
@@ -155,7 +174,15 @@ const ProductDetailsClient = ({ products, product }) => {
             >
               Add to Cart
             </button>
-            <button type="button" className="buy-now">
+            <button
+              type="button"
+              className="buy-now"
+              onClick={() => {
+                onCheckoutAdd(product, qty);
+                router.push("/checkout");
+                setLoading(true);
+              }}
+            >
               Buy Now
             </button>
           </div>

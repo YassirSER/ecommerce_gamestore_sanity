@@ -423,7 +423,7 @@ const Checkout = () => {
 
       <div className="checkout-products-container">
         <h2 className="checkout-products-header">Products</h2>
-        <div className="product-container">
+        <div className="product-container-fit">
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className="product" key={item._id}>

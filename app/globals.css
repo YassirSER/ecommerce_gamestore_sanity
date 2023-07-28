@@ -410,6 +410,21 @@ span.text-red {
 .product-card:hover {
   transform: scale(1.1, 1.1);
 }
+.blabla-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.blabla-container a {
+  color: blueviolet;
+}
+.blabla-container p {
+  line-height: 20px;
+}
 .maylike-product-image {
   /* margin: 10px; */
   /* width: 100%; */
@@ -813,6 +828,7 @@ header {
   justify-content: flex-start;
   background-color: white;
   flex-direction: column;
+  height: fit-content;
 }
 .payment-page-container {
   width: 60%;
@@ -1181,9 +1197,17 @@ textarea:focus {
   cursor: pointer;
 }
 .product-container {
+  /* margin-top: 15px; */
+  overflow: auto;
+  height: 65vh;
+  width: 100%;
+  /* padding: 20px 10px; */
+  /* border-bottom: 1px solid lightgrey; */
+}
+.product-container-fit {
   margin-top: 15px;
   overflow: auto;
-  height: 60vh;
+  height: fit-content;
   width: 100%;
   /* padding: 20px 10px; */
   /* border-bottom: 1px solid lightgrey; */
@@ -1762,10 +1786,6 @@ textarea:focus {
   .cart-products-container {
     width: 90%;
   }
-  .product {
-    /* padding: 20px 5px; */
-    margin-left: 20px;
-  }
   .times-icon-sm {
     position: absolute;
     /* right: 15%; */
@@ -1790,7 +1810,7 @@ textarea:focus {
   }
 
   .item-desc .flex {
-    width: 200px;
+    width: 100%;
   }
   .top {
     flex-wrap: wrap;
