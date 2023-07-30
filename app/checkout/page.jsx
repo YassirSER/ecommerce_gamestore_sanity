@@ -171,7 +171,7 @@ const Checkout = () => {
       if (typeof window !== "undefined" && shouldProceed.proceed) {
         const ycPay = new YCPay(process.env.NEXT_PUBLIC_YCP_PUB_KEY, {
           locale: "fr",
-          isSandbox: true,
+          isSandbox: false,
           errorContainer: "#error-container",
           formContainer: "#payment-container",
         });
@@ -187,12 +187,32 @@ const Checkout = () => {
               ?.addEventListener("click", function () {
                 // Execute the payment, it is required to put the
                 // created token in the tokenization step.
-                setPayLoading(true);
                 ycPay
                   .pay(token)
                   .then(async (payed) => {
+                    setPayLoading(true);
                     // await onSubmitAfterPayment("Pay√©");
                     // setPayLoading(false);
+                    if (ycPay.selectedGateway.name === "CashPlus") {
+                      // setPayLoading(false);
+                      let names = cartItems.map((item) => item.name + ",");
+                      console.log(order);
+
+                      await axios("/api/email", {
+                        method: "POST",
+                        data: {
+                          subject: "new product bought",
+                          fromEmail: data.email,
+                          toEmail: "digitalcitymaroc@hotmail.com",
+                          html: render(
+                            <PurchaseNotificationForMe
+                              order={order}
+                              names={names}
+                            />
+                          ),
+                        },
+                      });
+                    }
 
                     let names = cartItems.map((item) => item.name + ",");
                     console.log(order);
