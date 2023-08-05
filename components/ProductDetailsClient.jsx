@@ -83,7 +83,7 @@ const ProductDetailsClient = ({ products, product }) => {
               position: "absolute",
               top: "50%",
               left: "50%",
-              zIndex: "5555",
+              zIndex: "90",
             }}
           >
             <LoadingSpinner />
@@ -96,18 +96,6 @@ const ProductDetailsClient = ({ products, product }) => {
               className="product-detail-image"
             />
           </div>
-          {/* <div className="small-images-container">
-            {image?.map((item, i) => (
-              <img
-                key={i}
-                src={urlFor(item)}
-                className={
-                  i === index ? "small-image selected-image" : "small-image"
-                }
-                onMouseEnter={() => setIndex(i)}
-              />
-            ))}
-          </div> */}
         </div>
 
         <div className="product-detail-desc">

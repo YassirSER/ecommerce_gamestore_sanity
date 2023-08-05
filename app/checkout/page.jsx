@@ -101,16 +101,16 @@ const Checkout = () => {
     const { lastName, firstName, phoneNumber, email, city } = data;
     try {
       // On sumbitting the form we create an order with the information provided, this createOrder function could be anything, like talking to a shopify API, or a custom solution
-      const createdOrder = await client.create({
+      const createdOrder = {
         _type: "order",
         name: firstName + " " + lastName,
         email: email,
         phoneNumber: phoneNumber,
         city: city,
         orderId: uuidv4(),
-        status: "pending",
+        // status: "pending",
         price: totalPrice,
-      });
+      };
 
       console.log(createdOrder);
 
@@ -135,16 +135,17 @@ const Checkout = () => {
             },
           },
         });
-        console.log(res);
+        console.log(res.data.data?.token);
         if (res.data.ok) {
           // after the token is created, we can show the user the payment form,
           // here we will only update the state, because there a
           // useEffect comming that will handle showing the payment form
           // depending on the state provided bellow.
-          setToken(res.data?.data?.token);
+          setToken(res.data.data?.token);
+          console.log(token);
           setShouldProcceed({
             proceed: true,
-            orderId: "createdOrder.orderId",
+            orderId: "order.orderId",
             customer: {
               name: `${firstName} ${lastName}`,
               phone: phoneNumber,
@@ -194,9 +195,14 @@ const Checkout = () => {
                     // await onSubmitAfterPayment("Pay√©");
                     // setPayLoading(false);
                     if (ycPay.selectedGateway.name === "CashPlus") {
-                      // setPayLoading(false);
+                      setPayLoading(false);
                       let names = cartItems.map((item) => item.name + ",");
                       console.log(order);
+
+                      await client.create({
+                        ...order,
+                        status: "cashplus pending",
+                      });
 
                       await axios("/api/email", {
                         method: "POST",
@@ -212,42 +218,42 @@ const Checkout = () => {
                           ),
                         },
                       });
+                    } else {
+                      let names = cartItems.map((item) => item.name + ",");
+                      console.log(order);
+
+                      await client.create({
+                        ...order,
+                        status: "creditcard done",
+                      });
+
+                      await axios("api/email", {
+                        method: "POST",
+                        data: {
+                          subject: "Purchase Status",
+                          fromEmail: "digitalcity@hotmail.com",
+                          toEmail: data.email,
+                          html: render(<PaymentNotification order={order} />),
+                        },
+                      });
+
+                      await axios("/api/email", {
+                        method: "POST",
+                        data: {
+                          subject: "new product bought",
+                          fromEmail: data.email,
+                          toEmail: "digitalcitymaroc@hotmail.com",
+                          html: render(
+                            <PurchaseNotificationForMe
+                              order={order}
+                              names={names}
+                            />
+                          ),
+                        },
+                      });
+
+                      router.push(`/order-complete?orderId=${order.orderId}`);
                     }
-
-                    let names = cartItems.map((item) => item.name + ",");
-                    console.log(order);
-
-                    await client
-                      .patch(order._id)
-                      .set({ status: "done" })
-                      .commit();
-
-                    await axios("api/email", {
-                      method: "POST",
-                      data: {
-                        subject: "Purchase Status",
-                        fromEmail: "digitalcity@hotmail.com",
-                        toEmail: data.email,
-                        html: render(<PaymentNotification order={order} />),
-                      },
-                    });
-
-                    await axios("/api/email", {
-                      method: "POST",
-                      data: {
-                        subject: "new product bought",
-                        fromEmail: data.email,
-                        toEmail: "digitalcitymaroc@hotmail.com",
-                        html: render(
-                          <PurchaseNotificationForMe
-                            order={order}
-                            names={names}
-                          />
-                        ),
-                      },
-                    });
-
-                    router.push(`/order-complete?orderId=${order.orderId}`);
                   })
                   .catch((error) => {
                     toast.error(error?.errorMessage || "An error occured");
@@ -410,6 +416,7 @@ const Checkout = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  width: "100%",
                 }}
                 className={!shouldProceed.proceed ? "hidden" : ""}
               >
